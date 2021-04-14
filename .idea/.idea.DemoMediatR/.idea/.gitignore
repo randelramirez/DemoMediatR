@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.DemoMediatR.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../:\Dev-Randel\DemoMediatR\.idea\.idea.DemoMediatR\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
