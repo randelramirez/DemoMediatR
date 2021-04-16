@@ -20,12 +20,11 @@ namespace API
                 {
                     databaseSeeder.SeedCustomers();
                 }
-                
+
                 if (!context.Products.Any())
                 {
                     databaseSeeder.SeedProducts();
                 }
-
             }
         }
     }

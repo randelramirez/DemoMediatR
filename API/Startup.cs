@@ -1,6 +1,5 @@
 using System.Reflection;
 using Application;
-using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,11 +30,11 @@ namespace API
             services.AddScoped<IOrdersService, OrdersService>();
             // services.AddScoped<ICustomersService, CustomersService>();
             services.AddScoped<IProductsService, ProductsService>();
-            
+
             var contextAssembly = typeof(DataContext).GetTypeInfo().Assembly.GetName().Name;
             services.AddDbContextPool<DataContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString(nameof(DataContext)), 
+                options.UseSqlServer(Configuration.GetConnectionString(nameof(DataContext)),
                     b => b.MigrationsAssembly(contextAssembly));
                 // options.UseInMemoryDatabase(databaseName: nameof(DataContext));
             });
