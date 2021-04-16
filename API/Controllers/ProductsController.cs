@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using Application;
-using Domain;
+using Application.Features.Products.Commands.CreateProduct;
+using Application.Features.Products.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -11,24 +13,26 @@ namespace API.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductsService service;
+        private readonly IMediator mediator;
 
-        public ProductsController(IProductsService service)
+        public ProductsController(IProductsService service, IMediator mediator)
         {
             this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.mediator = mediator ?? throw  new ArgumentNullException(nameof(mediator));
         }
 
         // GET: api/Products
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await service.GetAll());
+            return Ok(await  this.mediator.Send(new GetProductsQuery()));
         }
 
         // GET: api/Products/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(Guid id)
         {
-            var product = service.GetOne(id);
+            var product = service.GetAsync(id);
             if (product == null) return NotFound();
 
             return Ok(product);
@@ -36,8 +40,16 @@ namespace API.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public void Post([FromBody] Product product)
+        public async Task<IActionResult> Post([FromBody] CreateProductCommand createProductCommand)
         {
+            var response = await  this.mediator.Send(createProductCommand);
+            if (response.Success is not  true)
+            {
+                return BadRequest(response.ValidationErrors);
+            }
+
+            return Ok(response.Product);
+            //return CreatedAtAction()
         }
 
         // PUT: api/Products/5

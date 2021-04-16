@@ -8,12 +8,18 @@ namespace Application
 {
     public interface IProductsService
     {
-        Task<IEnumerable<Product>> GetAll();
+        Task<IEnumerable<Product>> GetAllAsync();
 
-        Task<Product> GetOne(Guid productId);
+        Task<Product> GetAsync(Guid productId);
 
-        Task<Product> GetByName(string name);
+        Task<Product> GetByNameAsync(string name);
 
-        Task<IEnumerable<Product>> SearchByCritera(Expression<Func<Product, bool>> searchCritera);
+        Task<IEnumerable<Product>> SearchByCriteraAsync(Expression<Func<Product, bool>> searchCritera);
+
+        Task AddAsync(Product product);
+
+        Task UpdateAsync(Product product);
+        
+        Task DeleteAsync(Guid id);
     }
 }

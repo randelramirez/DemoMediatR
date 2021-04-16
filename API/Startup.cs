@@ -1,14 +1,11 @@
-using System.Reflection;
 using Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Persistence;
-using Persistence.Services;
 
 namespace API
 {
@@ -26,18 +23,8 @@ namespace API
         {
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
-
-            services.AddScoped<IOrdersService, OrdersService>();
-            // services.AddScoped<ICustomersService, CustomersService>();
-            services.AddScoped<IProductsService, ProductsService>();
-
-            var contextAssembly = typeof(DataContext).GetTypeInfo().Assembly.GetName().Name;
-            services.AddDbContextPool<DataContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString(nameof(DataContext)),
-                    b => b.MigrationsAssembly(contextAssembly));
-                // options.UseInMemoryDatabase(databaseName: nameof(DataContext));
-            });
+            services.AddApplicationServices();
+            services.AddPersistenceServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
