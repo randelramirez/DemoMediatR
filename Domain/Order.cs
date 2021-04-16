@@ -5,6 +5,16 @@ namespace Domain
 {
     public class Order
     {
+        public Order() : this(Guid.NewGuid())
+        {
+        }
+        
+        public Order(Guid id)
+        {
+            this.Id = id;
+            this.OrderDetails = new List<OrderDetail>();
+        }
+        
         public Guid Id { get; set; }
 
         public DateTime Date { get; set; }

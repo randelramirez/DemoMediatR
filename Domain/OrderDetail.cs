@@ -4,6 +4,15 @@ namespace Domain
 {
     public class OrderDetail
     {
+        public OrderDetail() : this(Guid.NewGuid())
+        {
+        }
+        
+        public OrderDetail(Guid id)
+        {
+            this.Id = id;
+        }
+        
         public Guid Id { get; set; }
 
         public Guid OrderId { get; set; }
