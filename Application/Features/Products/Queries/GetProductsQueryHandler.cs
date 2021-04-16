@@ -10,11 +10,8 @@ namespace Application.Features.Products.Queries
     {
         private readonly IProductsService service;
 
-        public GetProductsQueryHandler(IProductsService service)
-        {
-            this.service = service;
-        }
-        
+        public GetProductsQueryHandler(IProductsService service) => this.service = service;
+
         public async Task<IEnumerable<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             var products = await this.service.GetAllAsync();

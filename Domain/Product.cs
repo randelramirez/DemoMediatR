@@ -8,11 +8,8 @@ namespace Domain
         {
         }
 
-        public Product(Guid id)
-        {
-            Id = id;
-        }
-
+        public Product(Guid id) => Id = id;
+        
         public Guid Id { get; set; }
 
         public string Name { get; set; }

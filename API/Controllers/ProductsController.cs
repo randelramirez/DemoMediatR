@@ -23,11 +23,8 @@ namespace API.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(await  this.mediator.Send(new GetProductsQuery()));
-        }
-
+        public async Task<IActionResult> Get() => Ok(await  this.mediator.Send(new GetProductsQuery()));
+        
         // GET: api/Products/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(Guid id)

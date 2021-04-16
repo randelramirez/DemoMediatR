@@ -11,10 +11,8 @@ namespace Persistence.Services
     {
         private readonly DataContext context;
 
-        public OrdersService(DataContext context)
-        {
-            this.context = context;
-        }
+        public OrdersService(DataContext context) => this.context = context;
+
 
         public async Task<IEnumerable<Order>> GetAll(bool includeOrderDetails)
         {

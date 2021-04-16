@@ -13,10 +13,8 @@ namespace Persistence.Services
     {
         private readonly DataContext dataContext;
 
-        public ProductsService(DataContext dataContext)
-        {
+        public ProductsService(DataContext dataContext) => 
             this.dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
-        }
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
