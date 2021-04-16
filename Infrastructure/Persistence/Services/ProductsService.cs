@@ -13,27 +13,29 @@ namespace Persistence.Services
     {
         private readonly DataContext dataContext;
 
-        public ProductsService(DataContext dataContext) =>
+        public ProductsService(DataContext dataContext)
+        {
             this.dataContext = dataContext ?? throw new ArgumentNullException(nameof(dataContext));
-        
+        }
+
         public async Task<IEnumerable<Product>> GetAll()
         {
-            return await this.dataContext.Products.AsNoTracking().ToListAsync();
+            return await dataContext.Products.AsNoTracking().ToListAsync();
         }
 
         public async Task<Product> GetOne(Guid productId)
         {
-            return await this.dataContext.Products.FindAsync(productId.ToString());
+            return await dataContext.Products.FindAsync(productId.ToString());
         }
 
         public async Task<Product> GetByName(string name)
         {
-            return await this.dataContext.Products.SingleOrDefaultAsync(p => p.Name == name);
+            return await dataContext.Products.SingleOrDefaultAsync(p => p.Name == name);
         }
 
         public async Task<IEnumerable<Product>> SearchByCritera(Expression<Func<Product, bool>> searchCritera)
         {
-            return await this.dataContext.Products.Where(searchCritera).ToListAsync();
+            return await dataContext.Products.Where(searchCritera).ToListAsync();
         }
     }
 }

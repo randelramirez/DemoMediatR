@@ -11,17 +11,19 @@ namespace Persistence.Services
     {
         private readonly DataContext context;
 
-        public OrdersService(DataContext context) =>
+        public OrdersService(DataContext context)
+        {
             this.context = context;
-        
+        }
+
         public async Task<IEnumerable<Order>> GetAll(bool includeOrderDetails)
         {
-            return await this.context.Orders.Include(o => o.OrderDetails).ToListAsync();
+            return await context.Orders.Include(o => o.OrderDetails).ToListAsync();
         }
-        
+
         public async Task<Order> GetOne(Guid orderId, bool includeOrderDetails)
         {
-            return  await this.context.Orders.AsNoTracking()
+            return await context.Orders.AsNoTracking()
                 .Include(o => o.OrderDetails)
                 .SingleAsync(o => o.Id == orderId);
         }

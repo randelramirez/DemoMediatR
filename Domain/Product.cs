@@ -7,12 +7,12 @@ namespace Domain
         public Product() : this(Guid.NewGuid())
         {
         }
-        
+
         public Product(Guid id)
         {
-            this.Id = id;
+            Id = id;
         }
-        
+
         public Guid Id { get; set; }
 
         public string Name { get; set; }

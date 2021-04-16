@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Application;
 using Domain;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -15,25 +12,24 @@ namespace API.Controllers
     {
         private readonly IProductsService service;
 
-        public ProductsController(IProductsService service) =>
+        public ProductsController(IProductsService service)
+        {
             this.service = service ?? throw new ArgumentNullException(nameof(service));
-        
+        }
+
         // GET: api/Products
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await this.service.GetAll());
+            return Ok(await service.GetAll());
         }
 
         // GET: api/Products/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(Guid id)
         {
-            var product = this.service.GetOne(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            var product = service.GetOne(id);
+            if (product == null) return NotFound();
 
             return Ok(product);
         }
