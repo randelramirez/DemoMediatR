@@ -4,10 +4,7 @@ namespace Application.Features.Products.Commands.UpdateProduct
 {
     public class UpdateProductCommandResponse : BaseResponse
     {
-        public UpdateProductCommandResponse() : base()
-        {
-            
-        }
+        public UpdateProductCommandResponse() => Product = new UpdateProductDto();
 
         public bool Exists { get; set; } = true;
 

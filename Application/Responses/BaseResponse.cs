@@ -4,10 +4,6 @@ namespace Application.Responses
 {
     public class BaseResponse
     {
-        public BaseResponse()
-        {
-            Success = true;
-        }
         public BaseResponse(string message = null)
         {
             Success = true;
@@ -20,7 +16,7 @@ namespace Application.Responses
             Message = message;
         }
 
-        public bool Success { get; set; }
+        public bool Success { get; set; } = true;
         public string Message { get; set; }
         
         public List<string> ValidationErrors { get; set; }

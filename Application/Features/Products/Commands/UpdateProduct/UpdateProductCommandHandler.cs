@@ -55,7 +55,7 @@ namespace Application.Features.Products.Commands.UpdateProduct
                     Price = product.Price
                 };
             }
-
+            
             return updateProductCommandResponse;
         }
     }

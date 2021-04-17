@@ -54,7 +54,6 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody]  UpdateProductModel model)
         {
-
             var response = await this.mediator.Send(new UpdateProductCommand(id, model));
 
             if (!response.Exists)
