@@ -8,6 +8,4 @@ namespace Application.Features.Products.Commands.CreateProduct
 
         public double Price { get; set; }
     }
-
-   
 }

@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Application;
 using Application.Features.Products.Commands.CreateProduct;
+using Application.Features.Products.Commands.UpdateProduct;
 using Application.Features.Products.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -51,8 +52,24 @@ namespace API.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateProductCommand updateProductCommand)
         {
+            // We could instead use a dto as input parameter(dto has no id property), and then create a UpdateProductCommand object with id property
+            // ensure url id and the product id to edit are the same
+            updateProductCommand.Id = id;
+            var response = await this.mediator.Send(updateProductCommand);
+
+            if (!response.Exists)
+            {
+                return NotFound();
+            }
+
+            if (!response.Success)
+            {
+                return BadRequest(new {Errors = response.ValidationErrors});
+            }
+
+            return NoContent();
         }
 
         // DELETE: api/Products/5

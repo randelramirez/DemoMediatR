@@ -23,7 +23,7 @@ namespace Persistence.Services
 
         public async Task<Product> GetAsync(Guid productId)
         {
-            return await dataContext.Products.FindAsync(productId.ToString());
+            return await dataContext.Products.FindAsync(productId);
         }
 
         public async Task<Product> GetByNameAsync(string name)
@@ -44,14 +44,14 @@ namespace Persistence.Services
 
         public async Task UpdateAsync(Product product)
         {
-            var exists = await this.dataContext.Products.FindAsync(product.Id.ToString());
+            var exists = await this.dataContext.Products.FindAsync(product.Id);
             this.dataContext.Entry(exists).CurrentValues.SetValues(product);
             await this.dataContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            var existing = await this.dataContext.Products.FindAsync(id.ToString());
+            var existing = await this.dataContext.Products.FindAsync(id);
 
             if (existing == null)
             {
@@ -60,6 +60,12 @@ namespace Persistence.Services
 
             this.dataContext.Products.Remove(existing);
             await this.dataContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> IsExistingAsync(Guid id)
+        {
+            var product = await this.dataContext.Products.FindAsync(id);
+            return product != null;
         }
     }
 }

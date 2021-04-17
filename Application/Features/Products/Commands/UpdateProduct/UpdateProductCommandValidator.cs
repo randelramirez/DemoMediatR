@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Application.Features.Products.Commands.CreateProduct
+namespace Application.Features.Products.Commands.UpdateProduct
 {
-    public class CreateProductCommandValidator: AbstractValidator<CreateProductCommand>
+    public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
     {
-        public CreateProductCommandValidator()
+        public UpdateProductCommandValidator()
         {
             RuleFor(p => p.Name)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
@@ -12,7 +12,7 @@ namespace Application.Features.Products.Commands.CreateProduct
                 .MaximumLength(50).WithMessage("{PropertyName} must not exceed 30 characters.");
 
             RuleFor(p => p.Price)
-                .GreaterThan(0).WithMessage($"{nameof(CreateProductCommand.Price)} must have value greater than 0");
+                .GreaterThan(0).WithMessage($"{nameof(UpdateProductCommand.Price)} must have value greater than 0");
         }
     }
 }

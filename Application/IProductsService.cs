@@ -21,5 +21,7 @@ namespace Application
         Task UpdateAsync(Product product);
         
         Task DeleteAsync(Guid id);
+
+        Task<bool> IsExistingAsync(Guid id);
     }
 }
