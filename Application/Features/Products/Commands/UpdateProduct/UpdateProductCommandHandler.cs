@@ -40,7 +40,12 @@ namespace Application.Features.Products.Commands.UpdateProduct
             
             if (updateProductCommandResponse.Success)
             {
-                var product = new Product() { Name = request.Name, Price = request.Price};
+                var product = new Product()
+                {
+                    Id = request.Id, 
+                    Name = request.Model.Name, 
+                    Price = request.Model.Price
+                };
                 await this.service.UpdateAsync(product);
 
                 updateProductCommandResponse.Product = new UpdateProductDto()

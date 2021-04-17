@@ -38,9 +38,9 @@ namespace API.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateProductCommand createProductCommand)
+        public async Task<IActionResult> Post([FromBody] CreateProductModel model)
         {
-            var response = await  this.mediator.Send(createProductCommand);
+            var response = await  this.mediator.Send(new CreateProductCommand(model));
             if (response.Success is not  true)
             {
                 return BadRequest(response.ValidationErrors);
@@ -52,12 +52,10 @@ namespace API.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateProductCommand updateProductCommand)
+        public async Task<IActionResult> Put(Guid id, [FromBody]  UpdateProductModel model)
         {
-            // We could instead use a dto as input parameter(dto has no id property), and then create a UpdateProductCommand object with id property
-            // ensure url id and the product id to edit are the same
-            updateProductCommand.Id = id;
-            var response = await this.mediator.Send(updateProductCommand);
+
+            var response = await this.mediator.Send(new UpdateProductCommand(id, model));
 
             if (!response.Exists)
             {

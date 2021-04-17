@@ -33,7 +33,7 @@ namespace Application.Features.Products.Commands.CreateProduct
             
             if (createProductCommandResponse.Success)
             {
-                var product = new Product() { Name = request.Name, Price = request.Price};
+                var product = new Product() { Name = request.Model.Name, Price = request.Model.Price};
                 await this.service.AddAsync(product);
 
                 createProductCommandResponse.Product = new CreateProductDto()

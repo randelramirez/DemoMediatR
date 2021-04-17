@@ -6,13 +6,13 @@ namespace Application.Features.Products.Commands.CreateProduct
     {
         public CreateProductCommandValidator()
         {
-            RuleFor(p => p.Name)
+            RuleFor(p => p.Model.Name)
                 .NotEmpty().WithMessage("{PropertyName} is required.")
                 .NotNull()
                 .MaximumLength(50).WithMessage("{PropertyName} must not exceed 30 characters.");
 
-            RuleFor(p => p.Price)
-                .GreaterThan(0).WithMessage($"{nameof(CreateProductCommand.Price)} must have value greater than 0");
+            RuleFor(p => p.Model.Price)
+                .GreaterThan(0).WithMessage($"{nameof(CreateProductCommand.Model.Price)} must have value greater than 0");
         }
     }
 }
