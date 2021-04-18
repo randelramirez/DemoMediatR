@@ -35,13 +35,7 @@ namespace Application.Features.Products.Commands.CreateProduct
             {
                 var product = new Product() { Name = request.Model.Name, Price = request.Model.Price};
                 await this.service.AddAsync(product);
-
-                createProductCommandResponse.Product = new CreateProductDto()
-                {
-                    Id = product.Id, 
-                    Name = product.Name, 
-                    Price = product.Price
-                };
+                createProductCommandResponse.Product = new CreateProductDto(product.Id, product.Name, product.Price);
             }
 
             return createProductCommandResponse;

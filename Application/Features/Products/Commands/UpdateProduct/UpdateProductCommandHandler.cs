@@ -47,13 +47,7 @@ namespace Application.Features.Products.Commands.UpdateProduct
                     Price = request.Model.Price
                 };
                 await this.service.UpdateAsync(product);
-
-                updateProductCommandResponse.Product = new UpdateProductDto()
-                {
-                    Id = product.Id, 
-                    Name = product.Name, 
-                    Price = product.Price
-                };
+                updateProductCommandResponse.Product = new UpdateProductDto(product.Id, product.Name, product.Price);
             }
             
             return updateProductCommandResponse;
