@@ -12,7 +12,7 @@ namespace Application.Features.Products.Commands.UpdateProduct
         private readonly IProductsService service;
 
         public UpdateProductCommandHandler(IProductsService service) => 
-            this.service = service ?? throw  new  ArgumentNullException(nameof(service));
+            this.service = service ?? throw new ArgumentNullException(nameof(service));
         
         public async Task<UpdateProductCommandResponse> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {

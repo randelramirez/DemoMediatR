@@ -2,12 +2,12 @@
 
 namespace Application.Features.Products.Queries
 {
-    public class ProductDto
+    public record ProductDto
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
 
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        public double Price { get; set; }
+        public double Price { get; init; }
     }
 }

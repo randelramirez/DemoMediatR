@@ -2,12 +2,12 @@
 
 namespace Application.Features.Products.Commands.UpdateProduct
 {
-    public class UpdateProductDto
+    public record UpdateProductDto
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
 
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        public double Price { get; set; }
+        public double Price { get; init; }
     }
 }

@@ -6,9 +6,6 @@ namespace Application.Features.Products.Commands.CreateProduct
     {
         public readonly CreateProductModel Model;
 
-        public CreateProductCommand(CreateProductModel model)
-        {
-            this.Model = model;
-        }
+        public CreateProductCommand(CreateProductModel model) => Model = model;
     }
 }

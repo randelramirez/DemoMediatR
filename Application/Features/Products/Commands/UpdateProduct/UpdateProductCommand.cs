@@ -8,17 +8,6 @@ namespace Application.Features.Products.Commands.UpdateProduct
         public readonly Guid Id;
         public readonly UpdateProductModel Model;
 
-        public UpdateProductCommand(Guid id, UpdateProductModel model)
-        {
-            Id = id;
-            Model = model;
-        }
-    }
-
-    public class UpdateProductModel
-    {
-        public string Name { get; set; }
-
-        public double Price { get; set; }
+        public UpdateProductCommand(Guid id, UpdateProductModel model) => (Id, Model) = (id, model);
     }
 }
